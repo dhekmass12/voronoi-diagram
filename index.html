@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Voronoi</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<h1>Voronoi Diagram test</h1>
+	<svg width="500" height="300" xmlns="http://www.w3.org/2000/svg" id="voronoi_svg">
+
+	</svg>
+	<div id="controls">
+        <div>
+			<input type="button" class="btn-control" id="calculate-btn" value="Calculate">
+			<input type="button" class="btn-control" id="reset-btn" value="Reset">
+        </div>
+    <div id="timer">
+      <h1 id="">Running Time</h1>
+      <p></p>
+    </div>
+    <div id="rnd-generator">
+      <input type="button" class="btn-control" id="generate-btn" value="Generate">
+      <input type="text" class="btn-control" id="generate-text" value="10" >
+    </div>
+  </div>
+  <div id="parab-list">
+  </div>
+
+  <script src="graphics.js"> </script>
+  <script src="Voronoi.js"> </script>
+  <script src="test.js"> </script>
+
+</body>
+
+</html>
