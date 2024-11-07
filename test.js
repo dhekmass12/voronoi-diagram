@@ -4,12 +4,14 @@ let points = [
 ];
 
 let vor, gr, _svg_; 
-let moving_point 
 
 (function () {
 	_svg_ = document.getElementById("voronoi_svg");
 
-    vor = new VoronoiDiagram(points, _svg_.width.baseVal.value, _svg_.height.baseVal.value);    
+    let h = _svg_.height.baseVal.value;
+ 	let w = _svg_.width.baseVal.value;
+
+    vor = new VoronoiDiagram(points, w, h);    
     gr = new SVG_Graphics(_svg_);
 
     document.getElementById("voronoi_svg").onclick = addPoint;
@@ -24,7 +26,6 @@ function reset() {
     vor.point_list = [];
     points = [];
     _svg_.textContent = '';
-
 };
 
 function addPoint(event) {
@@ -53,39 +54,6 @@ function calculate(){
 
     document.getElementById("timer").innerText= (t1 - t0).toFixed(2) + " ms";
 }
-
-
-// function update(event) {
-//     let x = event.offsetX;
-//     let y = event.offsetY;
-
-//     if(moving_point === points[points.length-1])points.pop(); 
-
-//     /* Add point */
-//     let add = true;
-//     for(const p of points){
-//         let d = Math.sqrt((x-p.x)**2+(y-p.y)**2);
-//         if(d<3) add = false;
-//     }
-//     if(add){
-//         moving_point = new Point(x, y)
-//         points.push(moving_point);
-//     }
-//     vor.point_list = points;
-
-
-//     let t0 = performance.now();
-
-//     vor.update();
-
-//     let t1 = performance.now();
-
-//     gr.draw(points,vor.voronoi_vertex,vor.edges);
-
-//     document.getElementById("timer").innerText = (t1 - t0).toFixed(2) + " ms";
-
-
-// };
 
 
 function generate() {
