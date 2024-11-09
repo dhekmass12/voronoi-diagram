@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html>
-
-    <head>
+    <html lang="en">
+        <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Voronoi</title>
-        <link href="style.css" rel="stylesheet" type="text/css" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="main.css">
+        <meta name="generator" content="Jekyll v3.10.0">
     </head>
 
-    <body>
-        <h1>Voronoi Diagram</h1>
-        <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg" id="voronoi_svg">
+    <div style="margin: 50px auto; max-width:500px">
+        <svg style="min-width: 100%; height: 300px;border: 1px solid #dcdcdc;" xmlns="http://www.w3.org/2000/svg" id="voronoi">
         </svg>
-        <div id="controls">
-            <div>
-                <input type="button" class="btn-control" id="calculate-btn" value="Calculate">
-                <input type="button" class="btn-control" id="reset-btn" value="Reset">
+        <div class="row" style="font-size: 1.2rem;">
+            <div class="four columns">
+                <p>Click on the canvas to add a site</p>
             </div>
-            <div id="timer">
-                <h1 id="">Running Time</h1>
-                <p></p>
-            </div>
-            <div id="rnd-generator">
-                <input type="button" class="btn-control" id="generate-btn" value="Generate">
-                <input type="text" class="btn-control" id="generate-text" value="10" >
+            <div class="four columns" style="text-align:center">  
+                <p>Execution time:  <em id="timer">2.00 ms</em></p>
+            </div> 
+            <div class="four columns">
+                <input type="button" class="btn-control u-pull-right" id="clear" value="Clear">
             </div>
         </div>
+        <script src="Voronoi.js"></script>
+        <script src="graphics.js"></script>
+    </div>
 
-        <div id="parab-list">
+    <div style="margin: 50px auto; max-width:500px">
+        <svg style="min-width: 100%; height: 300px;border: 1px solid #dcdcdc;" xmlns="http://www.w3.org/2000/svg" id="chart1">
+        </svg>
+        <div class="row">
+            <div class="eight columns">
+            <p style="
+                font-size: 1rem;
+                color: rgb(157, 157, 157);"><strong>Note</strong>: the new points must have decreasing y-coordinate. To reset the points press the clear button.</p>
+            </div>
         </div>
-
-        <script src="graphics.js"> </script>
-        <script src="VoronoiDiagram.js"> </script>
-        <script src="test.js"> </script>
-
-        <!-- <div style="margin: 50px auto; max-width:500px" id="chart1"> -->
-            <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg" id="chart1">
-            </svg>
-        <!-- </div> -->
-
+        <div>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="debug/Parabola.js"></script>
         <script src="debug/BinomialThree.js"></script>
@@ -46,9 +45,15 @@
         <script src="debug/Segment.js"></script>
         <script src="debug/Circle.js"></script>
         <script src="debug/VoronoiEvent.js"></script>
-        <script src="debug/VoronoiDebug.js"></script>
-        <script src="test2.js"> </script>
+        <script src="debug/Voronoi.js"></script>
+        <script src="main.js"></script>
+    </div>
+
+    </div>
+    </article>
+    </main>
+    
+
 
     </body>
-
 </html>

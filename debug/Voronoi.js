@@ -1,4 +1,4 @@
-class VoronoiDebug {
+class VoronoiDiagram {
 	constructor(svg_context, debug = false) {
 		this.beach_line = new BTStruct(Parabola.minor, Parabola.equal);
 		this.line_list = [];
@@ -289,6 +289,8 @@ class VoronoiDebug {
             this.update();
         }
     }
+
+
 
 	// On click
 	svg_context_attach_events(obj = this) {
