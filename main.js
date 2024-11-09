@@ -23,7 +23,7 @@ $(document).ready(function () {
 	let t1 = performance.now();
 	$("#timer").text((t1 - t0).toFixed(2) + " ms");
 
-    gr.draw(points,vor.voronoi_vertex,vor.edges);
+    gr.draw(points,vor.voronoi_vertex,vor.edges, vor.maxCircle);
 
 	$("#clear").on("click", function () {
 		vor.point_list = [];
@@ -53,7 +53,7 @@ $(document).ready(function () {
 	
 		let t1 = performance.now();
 	
-		gr.draw(points,vor.voronoi_vertex,vor.edges);
+		gr.draw(points, vor.voronoi_vertex, vor.edges, vor.maxCircle);
 	
 		$("#timer").text((t1 - t0).toFixed(2) + " ms");
 

@@ -20,5 +20,4 @@ class VoronoiEvent{
     if (eA != null && eA.position < eB.position) return true;
     return false;
   }
-
 }
