@@ -29,8 +29,9 @@ $(document).ready(function () {
 		vor.point_list = [];
 		points = [];
 		_svg_.textContent = '';
-        vor1.set_points([]);
-		vor1.reset();
+        // vor1.set_points([]);
+		// vor1.reset();
+		voronoi.clearSites();
 	});
 
 	$("#voronoi").on("click", function (event) {
@@ -57,21 +58,24 @@ $(document).ready(function () {
 	
 		$("#timer").text((t1 - t0).toFixed(2) + " ms");
 
-        vor1.add_point(new PointD(x, y, 2));
+        // vor1.add_point(new PointD(x, y, 2));
         // vor1.partial_update(y);
         // vor1.add_point(new PointD(w1,h1*0.3,2));
         // vor1.partial_update(h1*0.8);
+
+		// event handlers
+		voronoi.addSite(x, y);
 	});
 });
 
-$(document).ready(function () {
-	let _svg_1= $("#chart1");
-	let w1 = _svg_1[0].width.baseVal.value
-	let h1 = _svg_1[0].height.baseVal.value
-	vor1 = new VoronoiDiagram(_svg_1, true);
+// $(document).ready(function () {
+// 	let _svg_1= $("#chart1");
+// 	let w1 = _svg_1[0].width.baseVal.value
+// 	let h1 = _svg_1[0].height.baseVal.value
+// 	vor1 = new VoronoiDiagram(_svg_1, true);
 
-	// $("#reset-btn").on("click", function () {
-	// 	vor1.set_points([]);
-	// 	vor1.reset();
-	// });
-});
+// 	$("#reset-btn").on("click", function () {
+// 		vor1.set_points([]);
+// 		vor1.reset();
+// 	});
+// });
