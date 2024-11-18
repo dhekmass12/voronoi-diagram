@@ -1,74 +1,72 @@
-let points = [
-];
-
-let vor, gr, _svg_, vor1
-
+// Initialize global variables
+let points = [];
+let vor, gr, _svg_, vor1;
+let fileContent = '';
 
 $(document).ready(function () {
-	_svg_ = document.getElementById("voronoi");
+    // Get the SVG element
+    _svg_ = document.getElementById("voronoi");
 
-	let h = _svg_.height.baseVal.value;
- 	let w = _svg_.width.baseVal.value;
+    // Get the dimensions of the SVG element
+    let h = _svg_.height.baseVal.value;
+    let w = _svg_.width.baseVal.value;
 
-	points.forEach(element => {
-		element.x *= w/100;
-		element.y *= h/100;
-	});
-	
-    vor = new Voronoi(points, w, h);    
+    // Scale points based on SVG dimensions
+    points.forEach(element => {
+        element.x *= w / 100;
+        element.y *= h / 100;
+    });
+
+    // Initialize Voronoi and SVG_Graphics objects
+    vor = new Voronoi(points, w, h);
     gr = new SVG_Graphics(_svg_);
-	
-	let t0 = performance.now();
-	vor.update();
-	let t1 = performance.now();
-	$("#timer").text((t1 - t0).toFixed(2) + " ms");
 
-    gr.draw(points,vor.voronoi_vertex,vor.edges, vor.maxCircle);
+    // Measure and display the time taken to update the Voronoi diagram
+    let t0 = performance.now();
+    vor.update();
+    let t1 = performance.now();
+    $("#timer").text((t1 - t0).toFixed(2) + " ms");
 
-	$("#clear").on("click", function () {
-		vor.point_list = [];
-		points = [];
-		_svg_.textContent = '';
-        // vor1.set_points([]);
-		// vor1.reset();
-		voronoi.clearSites();
-	});
+    // Draw the initial Voronoi diagram
+    gr.draw(points, vor.voronoi_vertex, vor.edges, vor.maxCircle);
 
-	$("#voronoi").on("click", function (event) {
-		let x = event.pageX - $(this).offset().left;
-		let y = event.pageY - $(this).offset().top;
-	
-		/* Add point */
-		let add = true;
-		for(const p of points){
-			let d = Math.sqrt((x-p.x)**2+(y-p.y)**2);
-			if(d<3) add = false;
-		}
-		if(add)points.push(new Point(x, y));
-		vor.point_list = points;
-	
-	
-		let t0 = performance.now();
-	
-		vor.update();
-	
-		let t1 = performance.now();
-	
-		gr.draw(points, vor.voronoi_vertex, vor.edges, vor.maxCircle);
-	
-		$("#timer").text((t1 - t0).toFixed(2) + " ms");
+    // Clear button event handler
+    $("#clear").on("click", function () {
+        vor.point_list = [];
+        points = [];
+        _svg_.textContent = '';
+        voronoi.clearSites();
+    });
 
-        // vor1.add_point(new PointD(x, y, 2));
-        // vor1.partial_update(y);
-        // vor1.add_point(new PointD(w1,h1*0.3,2));
-        // vor1.partial_update(h1*0.8);
+    // Voronoi SVG click event handler
+    $("#voronoi").on("click", function (event) {
+        let x = event.pageX - $(this).offset().left;
+        let y = event.pageY - $(this).offset().top;
 
-		// event handlers
-		voronoi.addSite(x, y);
-	});
+        // Check if the point is too close to existing points
+        let add = true;
+        for (const p of points) {
+            let d = Math.sqrt((x - p.x) ** 2 + (y - p.y) ** 2);
+            if (d < 3) add = false;
+        }
 
-	// File input event handler
-	$('#fileInput').on('change', function (event) {
+        // Add the point if it's not too close to existing points
+        if (add) points.push(new Point(x, y));
+        vor.point_list = points;
+
+        // Measure and display the time taken to update the Voronoi diagram
+        let t0 = performance.now();
+        vor.update();
+        let t1 = performance.now();
+        gr.draw(points, vor.voronoi_vertex, vor.edges, vor.maxCircle);
+        $("#timer").text((t1 - t0).toFixed(2) + " ms");
+
+        // Add the site to the Voronoi diagram
+        voronoi.addSite(x, y);
+    });
+
+    // File input event handler
+    $('#fileInput').on('change', function (event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -79,17 +77,17 @@ $(document).ready(function () {
         }
     });
 
-	// Add points button event handler
+    // Add points button event handler
     $('#addPoints').on('click', function () {
         const textInput = $('#textInput').val();
-        
-        // First, parse points from the text input
+
+        // Parse points from the text input
         if (textInput.trim() !== '') {
             updateVoronoi(textInput);
         }
 
-        // Then, parse points from the file content if a file was selected
-        if (fileContent.trim() !== '') {
+        // Parse points from the file content if a file was selected
+        if (fileContent && fileContent.trim() !== '') {
             updateVoronoi(fileContent);
             fileContent = ''; // Clear fileContent after processing
         }
@@ -100,19 +98,7 @@ $(document).ready(function () {
     });
 });
 
-// $(document).ready(function () {
-// 	let _svg_1= $("#chart1");
-// 	let w1 = _svg_1[0].width.baseVal.value
-// 	let h1 = _svg_1[0].height.baseVal.value
-// 	vor1 = new VoronoiDiagram(_svg_1, true);
-
-// 	$("#reset-btn").on("click", function () {
-// 		vor1.set_points([]);
-// 		vor1.reset();
-// 	});
-// });
-
-// Function to parse points from input string and update voronoi
+// Function to parse points from input string and update Voronoi diagram
 function updateVoronoi(input) {
     const regex = /\((\s*\d+\s*),(\s*\d+\s*)\)/g;
     let match;
@@ -137,28 +123,21 @@ function updateVoronoi(input) {
             }
         }
 
+        // Add the point if it's not too close to existing points
         if (add) {
             let newPoint = new Point(scaledX, scaledY);
             points.push(newPoint);
             vor.point_list = points;
 
-			let t0 = performance.now();
-	
-			vor.update();
-		
-			let t1 = performance.now();
-		
-			gr.draw(points, vor.voronoi_vertex, vor.edges, vor.maxCircle);
-		
-			$("#timer").text((t1 - t0).toFixed(2) + " ms");
-	
-			// vor1.add_point(new PointD(x, y, 2));
-			// vor1.partial_update(y);
-			// vor1.add_point(new PointD(w1,h1*0.3,2));
-			// vor1.partial_update(h1*0.8);
-	
-			// event handlers
-			voronoi.addSite(scaledX, scaledY);
+            // Measure and display the time taken to update the Voronoi diagram
+            let t0 = performance.now();
+            vor.update();
+            let t1 = performance.now();
+            gr.draw(points, vor.voronoi_vertex, vor.edges, vor.maxCircle);
+            $("#timer").text((t1 - t0).toFixed(2) + " ms");
+
+            // Add the site to the Voronoi diagram
+            voronoi.addSite(scaledX, scaledY);
         }
     }
 }
