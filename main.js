@@ -36,6 +36,7 @@ $(document).ready(function () {
         points = [];
         _svg_.textContent = '';
         voronoi.clearSites();
+		$('#timer').text("0.00 ms");
     });
 
     // Voronoi SVG click event handler

@@ -8,7 +8,7 @@
         <meta name="generator" content="Jekyll v3.10.0">
         <script src="Voronoi.js"></script>
         <script src="graphics.js"></script>
-        <script type="text/javascript" src="rhill-voronoi.js"></script>
+        <script type="text/javascript" src="animation.js"></script>
     </head>
 
     <body onload="voronoi.init();">
@@ -32,32 +32,16 @@
         </div>
 
         <div style="margin: 50px auto; max-width:500px">
-            <div id="voronoiCanvasControls">
-                <div style="width:19%;margin:0;border:0;display:inline-block;vertical-align:top;text-align:right">
-                    <input id="voronoiColourize" type="button" value="Colourize" onclick="voronoi.drawCells();"/>
-                </div>
-            </div>
             <div id="canvasParent">
                 <canvas id="voronoiCanvas" style="cursor:crosshair" width="500" height="300"></canvas>
             </div>
-            <h4 class="divhdr">Event queue</h4>
             <div class="divinfo">
                 <div style="width:49%;margin:0;border:0;display:inline-block;">
-                    <input id="voronoiProcessAll" type="button" value="Process all" onclick="voronoi.processQueueAll();"/>
-                    <br/>
-                    <input id="voronoiProcessOne" type="button" value="Process one" onclick="voronoi.processQueueOne();voronoi.draw();voronoi.dumpBeachline();"/>
-                    <input id="voronoiProcessNDo" type="button" value="Process" onclick="voronoi.processQueueN(parseInt(document.getElementById('voronoiProcessN').value,10));voronoi.draw();voronoi.dumpBeachline();"/>
-                    <input id="voronoiProcessN" type="text" value="10" size="4" maxlength="4"/>
                     <br/>
                     <input id="voronoiReset" type="button" value="Reset" onclick="voronoi.reset();"/>
                 </div>
                 <div style="width:49%;margin:0;border:0;display:inline-block;vertical-align:top">
-                    <input id="voronoiMoveSweepline" type="button" value="Move sweep line" onclick="voronoi.processUpTo(voronoi.sweep+parseInt(document.getElementById('voronoiMoveSweeplineN').value,10));voronoi.draw();voronoi.dumpBeachline();"/>
-                    <input id="voronoiMoveSweeplineN" type="text" value="4" size="3" maxlength="3"/>
-                    pixel(s)<br/>
-                    <input id="voronoiAnimateSweepline" type="button" value="Animate sweep line" onclick="voronoiAnimate(parseInt(document.getElementById('voronoiMoveSweeplineN').value,10),parseInt(document.getElementById('voronoiAnimateSweeplineDelay').value,10));document.getElementById('voronoiAnimateSweeplineDelay').value=voronoiAnimateDelay;"/>
-                    every <input id="voronoiAnimateSweeplineDelay" type="text" value="100" size="4" maxlength="4"/>
-                    ms <input id="voronoiAnimateSweeplineStop" type="button" value="Stop" onclick="voronoiAnimateStop();"/>
+                    <input id="voronoiAnimateSweepline" type="button" value="Animate sweep line" onclick="voronoiAnimate(parseInt(4,10),parseInt(100,10));"/>
                     <br/>
                 </div>
             </div>
